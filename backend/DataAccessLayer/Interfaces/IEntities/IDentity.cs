@@ -1,4 +1,4 @@
-﻿namespace DataAccessLayer.Interfaces
+﻿namespace DataAccessLayer.Interfaces.IEntities
 {
     public interface IDentity<TKey>
     {
