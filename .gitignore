@@ -1,0 +1,33 @@
+# ponytail: covers observed .NET 10 + Angular artifacts only
+
+# .NET
+[Bb]in/
+[Oo]bj/
+[Tt]est[Rr]esult/
+*.user
+*.slnLaunch.user
+publish/
+
+# Visual Studio / VS Code
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Node / Angular (frontend/WebApp)
+node_modules/
+npm-debug.log
+dist/
+out-tsc/
+.angular/
+coverage/
+
+# Secrets / local config
+.env
+appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db

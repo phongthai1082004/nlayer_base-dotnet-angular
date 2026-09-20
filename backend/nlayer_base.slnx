@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Backend/">
+    <Project Path="BusinessLogicLayer/BusinessLogicLayer.csproj" />
+    <Project Path="DataAccessLayer/DataAccessLayer.csproj" />
+    <Project Path="PresentationLayer/PresentationLayer.csproj" Id="66d91da6-296f-46c8-bf7d-09c2389aca32" />
+  </Folder>
+  <Folder Name="/Backend/NewFolder1/" />
+  <Folder Name="/Frontend/" />
+</Solution>

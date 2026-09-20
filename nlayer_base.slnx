@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/BusinessLogicLayer/BusinessLogicLayer.csproj" />
+    <Project Path="backend/DataAccessLayer/DataAccessLayer.csproj" />
+    <Project Path="backend/PresentationLayer/PresentationLayer.csproj" />
+  </Folder>
+  <Folder Name="/frontend/">
+    <Project Path="frontend/WebApp/WebApp.esproj">
+      <Build />
+      <Deploy />
+    </Project>
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+</Solution>
