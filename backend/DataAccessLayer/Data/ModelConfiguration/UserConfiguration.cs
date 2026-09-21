@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Data.ModelConfiguration.BaseEntityConfiguration;
+﻿using DataAccessLayer.Constants.Enums;
+using DataAccessLayer.Data.ModelConfiguration.BaseEntityConfiguration;
 using DataAccessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -15,10 +16,6 @@ namespace DataAccessLayer.Data.ModelConfiguration
 
             builder.HasKey(u => u.Id);
 
-            builder.Property(u => u.Username)
-                .IsRequired()
-                .HasMaxLength(50);
-
             builder.Property(u => u.Email)
                 .IsRequired()
                 .HasMaxLength(150);
@@ -26,7 +23,10 @@ namespace DataAccessLayer.Data.ModelConfiguration
             builder.HasIndex(u => u.Email)
                 .IsUnique();
 
-            builder.HasIndex(u => u.Username)
+            builder.Property(u => u.GoogleId)
+                .HasMaxLength(255);
+
+            builder.HasIndex(u => u.GoogleId)
                 .IsUnique();
 
             builder.Property(u => u.PasswordHash)
@@ -35,7 +35,7 @@ namespace DataAccessLayer.Data.ModelConfiguration
             builder.Property(u => u.Role)
                 .IsRequired()
                 .HasMaxLength(50)
-                .HasDefaultValue("User");
+                .HasConversion<string>();
 
             builder.Property(u => u.IsActive)
                 .HasDefaultValue(true);

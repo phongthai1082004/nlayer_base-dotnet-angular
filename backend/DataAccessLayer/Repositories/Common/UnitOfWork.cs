@@ -1,8 +1,5 @@
 ﻿using DataAccessLayer.Data;
-using DataAccessLayer.Interfaces.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using DataAccessLayer.Interfaces.IRepositories.Common;
 
 namespace DataAccessLayer.Repositories.Common
 {
@@ -13,11 +10,10 @@ namespace DataAccessLayer.Repositories.Common
         {
             _context = context;
         }
-        public IBaseRepository<TEntity, TKey> GenerateRepository<TEntity, TKey>() where TEntity : class
+        public IGenericRepository<TEntity, TKey> GenerateRepository<TEntity, TKey>() where TEntity : class
         {
-            return new BaseRepository<TEntity, TKey>(_context);
+            return new GenericRepository<TEntity, TKey>(_context);
         }
-        public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
-        public void Dispose() => _context.Dispose();
+        public async Task<int> SaveChangesAsync(CancellationToken ct = default) => await _context.SaveChangesAsync(ct);
     }
 }

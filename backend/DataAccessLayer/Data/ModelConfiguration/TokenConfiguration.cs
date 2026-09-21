@@ -22,9 +22,10 @@ namespace DataAccessLayer.Data.ModelConfiguration
             builder.Property(t => t.ExpiresAt)
                 .IsRequired();
 
-            builder.Ignore(t => t.IsExpired);
-            builder.Ignore(t => t.IsRevoked);
-            builder.Ignore(t => t.IsActive);
+            builder.Property(t => t.Status)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(20);
 
             builder.HasOne(t => t.User)
                 .WithMany(u => u.RefreshTokens)

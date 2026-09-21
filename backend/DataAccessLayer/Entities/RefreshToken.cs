@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Entities.Base;
+﻿using DataAccessLayer.Constants.Enums;
+using DataAccessLayer.Entities.Base;
 
 namespace DataAccessLayer.Entities
 {
@@ -7,10 +8,21 @@ namespace DataAccessLayer.Entities
         public Guid UserId { get; set; }
         public string Token { get; set; } = string.Empty;
         public DateTime ExpiresAt { get; set; }
-        public bool IsExpired => DateTime.UtcNow >= ExpiresAt;
         public DateTime? RevokedAt { get; set; }
-        public bool IsRevoked => RevokedAt != null;
-        public bool IsActive => !IsRevoked && !IsExpired;
+        public RefreshTokenStatus Status { get; set; } = RefreshTokenStatus.Active;
+
+        // ponytail: Status lưu lúc ghi nên gọi hàm này trước khi đọc để Expired không bị cũ
+        public void RefreshStatus()
+        {
+            if (Status == RefreshTokenStatus.Active && DateTime.UtcNow >= ExpiresAt)
+                Status = RefreshTokenStatus.Expired;
+        }
+
+        public void Revoke()
+        {
+            RevokedAt = DateTime.UtcNow;
+            Status = RefreshTokenStatus.Revoked;
+        }
 
         public User User { get; set; } = null!;
     }
