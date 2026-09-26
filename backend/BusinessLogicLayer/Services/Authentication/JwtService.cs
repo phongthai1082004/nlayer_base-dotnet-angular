@@ -16,7 +16,7 @@ namespace BusinessLogicLayer.Services.Authentication
             _jwtSettings = jwtSettings;
         }
 
-        public string GenerateToken(string userId, string email)
+        public string GenerateToken(string userId, string email, string role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
@@ -26,7 +26,8 @@ namespace BusinessLogicLayer.Services.Authentication
                 Subject = new ClaimsIdentity(
                 [
                     new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Email, email)
+                    new Claim(ClaimTypes.Email, email),
+                    new Claim(ClaimTypes.Role, role)
                 ]),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.AccessTokenExpirationMinutes),
                 Issuer = _jwtSettings.ClaimsIssuer,

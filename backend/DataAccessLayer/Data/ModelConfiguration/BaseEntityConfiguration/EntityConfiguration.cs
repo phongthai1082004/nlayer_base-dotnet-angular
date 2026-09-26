@@ -10,7 +10,7 @@ namespace DataAccessLayer.Data.ModelConfiguration.BaseEntityConfiguration
         {
             builder.HasKey(e => e.Id);
             builder.Property(x => x.CreatedAt).IsRequired();
-            builder.Property(x => x.CreatedBy).IsRequired();
+            builder.Property(x => x.CreatedBy).IsRequired(false);
             builder.Property(x => x.ModifiedAt).IsRequired(false);
             builder.Property(x => x.ModifiedBy).IsRequired(false);
             builder.Property(x => x.IsDeleted);
@@ -23,7 +23,7 @@ namespace DataAccessLayer.Data.ModelConfiguration.BaseEntityConfiguration
         {
             builder.HasKey(e => e.Id);
             builder.Property(x => x.CreatedAt).IsRequired();
-            builder.Property(x => x.CreatedBy).IsRequired();
+            builder.Property(x => x.CreatedBy).IsRequired(false);
             builder.Property(x => x.ModifiedAt).IsRequired(false);
             builder.Property(x => x.ModifiedBy).IsRequired(false);
             return builder;

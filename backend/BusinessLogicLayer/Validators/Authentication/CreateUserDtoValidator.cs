@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace BusinessLogicLayer.Validators.Authentication
 {
-    public class LoginByEmailDtoValidator : AbstractValidator<CreateUserDto>
+    public class CreateUserDtoValidator : AbstractValidator<CreateUserDto>
     {
-        public LoginByEmailDtoValidator()
+        public CreateUserDtoValidator()
         {
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage(AuthenticationMessages.EmailRequired)

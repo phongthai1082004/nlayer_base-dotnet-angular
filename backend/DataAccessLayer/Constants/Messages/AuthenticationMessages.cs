@@ -14,5 +14,9 @@
         public const string PasswordLength = "Password must be between 8 and 100 characters.";
         public const string PasswordComplex = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
         public const string PasswordMismatch = "Password does not match.";
+
+        // Token
+        public const string InvalidRefreshToken = "Invalid refresh token.";
+
     }
 }

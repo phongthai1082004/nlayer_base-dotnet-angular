@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogicLayer.DTOs.Authentication
 {
-    public record LoginByEmailDtoRequest(
+    public sealed record LoginByEmailDtoRequest(
         string Email,
         string Password
     );

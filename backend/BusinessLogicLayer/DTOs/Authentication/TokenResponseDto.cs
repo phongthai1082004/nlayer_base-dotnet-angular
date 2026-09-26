@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogicLayer.DTOs.Authentication
 {
-    public record TokenResponseDto(
+    public sealed record TokenResponseDto(
         string AccessToken,
         string RefreshToken
     );

@@ -1,5 +1,4 @@
-﻿using DataAccessLayer.Constants.Enums;
-using DataAccessLayer.Data.ModelConfiguration.BaseEntityConfiguration;
+﻿using DataAccessLayer.Data.ModelConfiguration.BaseEntityConfiguration;
 using DataAccessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -23,12 +22,6 @@ namespace DataAccessLayer.Data.ModelConfiguration
             builder.HasIndex(u => u.Email)
                 .IsUnique();
 
-            builder.Property(u => u.GoogleId)
-                .HasMaxLength(255);
-
-            builder.HasIndex(u => u.GoogleId)
-                .IsUnique();
-
             builder.Property(u => u.PasswordHash)
                 .IsRequired();
 
@@ -41,11 +34,6 @@ namespace DataAccessLayer.Data.ModelConfiguration
                 .HasDefaultValue(true);
 
             builder.HasQueryFilter(u => !u.IsDeleted);
-
-            builder.HasMany(u => u.RefreshTokens)
-                .WithOne()
-                .HasForeignKey("UserId")
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

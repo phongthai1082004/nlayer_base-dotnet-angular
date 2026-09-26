@@ -1,7 +1,7 @@
 ﻿namespace BusinessLogicLayer.DTOs.Authentication
 {
-    public record CreateUserDto(
+    public sealed record CreateUserDto(
         string Email,
-        string? Password
+        string Password
     );
 }

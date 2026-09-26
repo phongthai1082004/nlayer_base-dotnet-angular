@@ -1,5 +1,6 @@
-﻿using DataAccessLayer.Constants.Config;
-using DataAccessLayer.Data;
+﻿using DataAccessLayer.Data;
+using DataAccessLayer.Externals.Google;
+using DataAccessLayer.Interceptors;
 using DataAccessLayer.Interfaces.IRepositories;
 using DataAccessLayer.Interfaces.IRepositories.Common;
 using DataAccessLayer.Repositories;
@@ -15,8 +16,17 @@ namespace DataAccessLayer
         public static IServiceCollection AddDALServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddDbContext<AppDbContext>(option => 
-                option.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IGoogleOAuthClient, GoogleOAuthClient>();
+            // Add Interceptors
+
+            services.AddScoped<AuditableEntityInterceptor>();
+            services.AddDbContext<AppDbContext>((sp, options) =>
+            {
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                       .AddInterceptors(sp.GetRequiredService<AuditableEntityInterceptor>());
+            });
+
             return services;
         }
     }

@@ -2,11 +2,11 @@
 
 namespace DataAccessLayer.Entities
 {
-    public class GuidEntityBase : IDentity<Guid>, ICreationAudit, IModificationAudit, ISoftDelete
+    public class GuidEntityBase : IDentity<Guid>, IAuditable, ISoftDelete
     {
         public Guid Id { get; set; } = Guid.CreateVersion7();
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public Guid CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; } 
+        public Guid? CreatedBy { get; set; }
         public DateTime? ModifiedAt { get; set; }
         public Guid? ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }

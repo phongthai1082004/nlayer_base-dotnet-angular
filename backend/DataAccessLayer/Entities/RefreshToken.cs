@@ -11,7 +11,6 @@ namespace DataAccessLayer.Entities
         public DateTime? RevokedAt { get; set; }
         public RefreshTokenStatus Status { get; set; } = RefreshTokenStatus.Active;
 
-        // ponytail: Status lưu lúc ghi nên gọi hàm này trước khi đọc để Expired không bị cũ
         public void RefreshStatus()
         {
             if (Status == RefreshTokenStatus.Active && DateTime.UtcNow >= ExpiresAt)
