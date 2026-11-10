@@ -1,0 +1,37 @@
+# Database Dependency PostgreSQL & MongoDB 
+dotnet add package MongoDB.Driver
+
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet tool install --global dotnet-ef
+
+# WebAPI
+dotnet add package Microsoft.AspNetCore.OpenApi --version 10.0.12
+dotnet add package Microsoft.VisualStudio.Azure.Containers.Tools.Targets --version 1.24.2-preview.1
+dotnet add package Swashbuckle.AspNetCore.SwaggerUI --version 10.2.3
+
+# JWT
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+dotnet add package BCrypt.Net-Next
+dotnet add package System.IdentityModel.Tokens.Jwt
+dotnet add package Microsoft.Extensions.Options.ConfigurationExtensions
+
+# Fluent Validator
+dotnet add package FluentValidation
+dotnet add package FluentValidation.DependencyInjectionExtensions
+
+# Check Health 
+dotnet add package Microsoft.Extensions.Diagnostics.HealthChecks
+dotnet add package AspNetCore.HealthChecks.UI.Client
+dotnet add package AspNetCore.HealthChecks.NpgSql
+
+#Serilog 
+dotnet add package Serilog.AspNetCore
+dotnet add package Serilog.Sinks.Console
+dotnet add package Serilog.Sinks.File
+
+# Create Migration
+dotnet ef migrations add InitialCreation --project Infrastructure/Infrastructure.csproj --startup-project Presentation/Presentation.csproj --output-dir Persistence/Migrations
+dotnet ef database update --project Infrastructure/Infrastructure.csproj --startup-project Presentation/Presentation.csproj

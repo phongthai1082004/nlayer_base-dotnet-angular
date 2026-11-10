@@ -24,8 +24,7 @@ namespace DataAccessLayer.Data.ModelConfiguration
 
             builder.Property(t => t.Status)
                 .IsRequired()
-                .HasConversion<string>()
-                .HasMaxLength(20);
+                .HasConversion<int>();
 
             builder.HasOne(t => t.User)
                 .WithMany(u => u.RefreshTokens)

@@ -27,8 +27,7 @@ namespace DataAccessLayer.Data.ModelConfiguration
 
             builder.Property(u => u.Role)
                 .IsRequired()
-                .HasMaxLength(50)
-                .HasConversion<string>();
+                .HasConversion<int>();
 
             builder.Property(u => u.IsActive)
                 .HasDefaultValue(true);

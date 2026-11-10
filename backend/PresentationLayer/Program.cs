@@ -1,12 +1,11 @@
 using BusinessLogicLayer;
 using DataAccessLayer;
 using DataAccessLayer.Constants.Config;
-using DataAccessLayer.Constants.Messages;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
-using PresentationLayer.Common;
+using Microsoft.AspNetCore.Mvc;
 using PresentationLayer.Middlewares;
 using Serilog;
 using System.Text;
@@ -50,7 +49,16 @@ builder.Services.AddAuthentication(o => {
         OnChallenge = ctx => {
             ctx.HandleResponse();
             ctx.Response.StatusCode = 401;
-            return ctx.Response.WriteAsJsonAsync(new ApiResponse<object?>(false, "Unauthorized", null));
+            ctx.Response.ContentType = "application/problem+json";
+            var problem = new ProblemDetails
+            {
+                Type = "https://httpstatuses.io/401",
+                Title = "Unauthorized",
+                Status = 401,
+                Detail = "Unauthorized! Please check your credentials.",
+                Instance = ctx.Request.Path
+            };
+            return ctx.Response.WriteAsJsonAsync(problem);
         }
     };
 });
@@ -75,8 +83,16 @@ builder.Services.AddRateLimiter(options =>
     options.OnRejected = async (context, cancellationToken) =>
     {
         context.HttpContext.Response.StatusCode = 429;
-        var response = new ApiResponse<object?>(false, StatusCode.TooManyRequests429, null);
-        await context.HttpContext.Response.WriteAsJsonAsync(response, cancellationToken);
+        context.HttpContext.Response.ContentType = "application/problem+json";
+        var problem = new ProblemDetails
+        {
+            Type = "https://httpstatuses.io/429",
+            Title = "Too Many Requests",
+            Status = 429,
+            Detail = "Too many requests! Please try again later.",
+            Instance = context.HttpContext.Request.Path
+        };
+        await context.HttpContext.Response.WriteAsJsonAsync(problem, cancellationToken);
     };
 });
 

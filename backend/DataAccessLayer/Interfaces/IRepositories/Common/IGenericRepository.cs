@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using DataAccessLayer.Shared;
+using System.Linq.Expressions;
 
 namespace DataAccessLayer.Interfaces.IRepositories.Common
 {
@@ -8,6 +9,7 @@ namespace DataAccessLayer.Interfaces.IRepositories.Common
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken ct = default);
         Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> expression, CancellationToken ct = default);
         Task<bool> AnyWhereAsync(Expression<Func<TEntity, bool>> expression, CancellationToken ct = default);
+        Task<PaginatedResult<TEntity>> GetListAsync(PageRequest request, CancellationToken ct = default);
         Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default);
         void AddRange(IEnumerable<TEntity> entities);
         void Update(TEntity entity); 

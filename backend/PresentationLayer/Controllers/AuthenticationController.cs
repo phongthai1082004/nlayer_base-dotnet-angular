@@ -2,7 +2,6 @@
 using BusinessLogicLayer.Interfaces.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PresentationLayer.Common;
 
 namespace PresentationLayer.Controllers
 {
@@ -18,7 +17,7 @@ namespace PresentationLayer.Controllers
             CancellationToken ct)
         {
             var tokens = await auth.LoginByGoogleCodeAsync(req.Code, ct);
-            return Ok(new ApiResponse<TokenResponseDto>(true, "Login success", tokens));
+            return Ok(tokens);
         }
 
         [HttpPost("login-by-email")]
@@ -29,7 +28,7 @@ namespace PresentationLayer.Controllers
             CancellationToken ct)
         {
             var tokens = await auth.LoginByEmailAsync(req, ct);
-            return Ok(new ApiResponse<TokenResponseDto>(true, "Login success", tokens));
+            return Ok(tokens);
         }
     }
 }
